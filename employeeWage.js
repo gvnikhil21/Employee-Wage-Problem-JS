@@ -72,4 +72,8 @@
     let fullDayWageArray = mapDayWithWageArray.filter(fullTimeWage);
     console.log("Day with full time wage: ");
     console.log(fullDayWageArray);
+
+    // finds the first day of full time wage
+    console.log("First day of full time wage is: ");
+    console.log(fullDayWageArray.find(fullTimeWage));
 }
