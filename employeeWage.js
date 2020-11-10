@@ -77,12 +77,19 @@
     console.log("First day of full time wage is: ");
     console.log(fullDayWageArray.find(fullTimeWage));
 
-    //checks whether every element of full time wage array holds for full time wage
+    // checks whether every element of full time wage array holds for full time wage
     console.log("\nDoes all elements in full time wage array hold full time wage: " + fullDayWageArray.every(fullTimeWage));
 
-    //checks for part time wage
+    // checks for part time wage
     function partTimeWage(dailyWage) {
         return dailyWage.includes("80");
     }
     console.log("\nDoes any elements in daily wage array hold part time wage: " + mapDayWithWageArray.some(partTimeWage));
+
+    // finds no. of days the employee worked
+    function daysWorked(noOfDays, dailyWage) {
+        if (dailyWage > 0) return noOfDays+1;
+        return noOfDays;
+    }
+    console.log("\nNumber of days employee worked: " + empDailyWageArray.reduce(daysWorked, 0));
 }
