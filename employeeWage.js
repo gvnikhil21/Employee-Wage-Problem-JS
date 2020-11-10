@@ -76,4 +76,7 @@
     // finds the first day of full time wage
     console.log("First day of full time wage is: ");
     console.log(fullDayWageArray.find(fullTimeWage));
+
+    //checks whether every element of full time wage array holds for full time wage
+    console.log("\nDoes all elements in full time wage array hold full time wage: " + fullDayWageArray.every(fullTimeWage));
 }
