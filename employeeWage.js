@@ -55,6 +55,7 @@
     // calculates total wage using array reduce method
     console.log("Total employee wage using reduce: " + empDailyWageArray.reduce(totalWageCal, 0));
 
+    // shows day alongwith daily wage earned on that day
     let dayNo = 0;
     function mapDayWithWage(dailyWage) {
         dayNo++;
@@ -63,4 +64,12 @@
     let mapDayWithWageArray = empDailyWageArray.map(mapDayWithWage);
     console.log("Day with Daily Wage Map: ");
     console.log(mapDayWithWageArray);
+
+    // shows days on which full time wage was earned
+    function fullTimeWage(dailyWage) {
+        return dailyWage.includes("160");
+    }
+    let fullDayWageArray = mapDayWithWageArray.filter(fullTimeWage);
+    console.log("Day with full time wage: ");
+    console.log(fullDayWageArray);
 }
