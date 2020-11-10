@@ -38,12 +38,15 @@
     let totalEmpHours = 0;
     let dayCount = 0;
     let empDailyWageArray = new Array();
+    let empDailyWageMap = new Map();
     while (dayCount < MONTHLY_WORKING_DAYS && totalEmpHours <= MONTHLY_WORKING_HOURS) {
         dayCount++;
         let empCheck = Math.floor(Math.random() * 10) % 3;
         let empHours = getEmpWorkingHours(empCheck);
         totalEmpHours += empHours;
-        empDailyWageArray.push(calculateDailyWage(empHours));
+        let dailyWage = calculateDailyWage(empHours);
+        empDailyWageArray.push(dailyWage);
+        empDailyWageMap.set(dayCount, dailyWage);
     }
     let empWage = calculateDailyWage(totalEmpHours);
     console.log("Total days: " + dayCount + " Total hours: " + totalEmpHours + " Employee wage: " + empWage);
@@ -78,18 +81,21 @@
     console.log(fullDayWageArray.find(fullTimeWage));
 
     // checks whether every element of full time wage array holds for full time wage
-    console.log("\nDoes all elements in full time wage array hold full time wage: " + fullDayWageArray.every(fullTimeWage));
+    console.log("Does all elements in full time wage array hold full time wage: " + fullDayWageArray.every(fullTimeWage));
 
     // checks for part time wage
     function partTimeWage(dailyWage) {
         return dailyWage.includes("80");
     }
-    console.log("\nDoes any elements in daily wage array hold part time wage: " + mapDayWithWageArray.some(partTimeWage));
+    console.log("Does any elements in daily wage array hold part time wage: " + mapDayWithWageArray.some(partTimeWage));
 
     // finds no. of days the employee worked
     function daysWorked(noOfDays, dailyWage) {
-        if (dailyWage > 0) return noOfDays+1;
+        if (dailyWage > 0) return noOfDays + 1;
         return noOfDays;
     }
-    console.log("\nNumber of days employee worked: " + empDailyWageArray.reduce(daysWorked, 0));
+    console.log("Number of days employee worked: " + empDailyWageArray.reduce(daysWorked, 0));
+
+    //calculates total wage using the values stored in map
+    console.log("Total wage of employee using values stored in map: " + Array.from(empDailyWageMap.values()).reduce(totalWageCal, 0));
 }
