@@ -79,4 +79,10 @@
 
     //checks whether every element of full time wage array holds for full time wage
     console.log("\nDoes all elements in full time wage array hold full time wage: " + fullDayWageArray.every(fullTimeWage));
+
+    //checks for part time wage
+    function partTimeWage(dailyWage) {
+        return dailyWage.includes("80");
+    }
+    console.log("\nDoes any elements in daily wage array hold part time wage: " + mapDayWithWageArray.some(partTimeWage));
 }
