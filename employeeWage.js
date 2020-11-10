@@ -54,4 +54,13 @@
 
     // calculates total wage using array reduce method
     console.log("Total employee wage using reduce: " + empDailyWageArray.reduce(totalWageCal, 0));
+
+    let dayNo = 0;
+    function mapDayWithWage(dailyWage) {
+        dayNo++;
+        return "Day: " + dayNo + " => DailyWage: " + dailyWage;
+    }
+    let mapDayWithWageArray = empDailyWageArray.map(mapDayWithWage);
+    console.log("Day with Daily Wage Map: ");
+    console.log(mapDayWithWageArray);
 }
