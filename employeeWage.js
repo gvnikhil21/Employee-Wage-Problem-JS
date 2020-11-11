@@ -134,8 +134,27 @@ console.log(`Non working days: ${nonWorkingDays}`);
                 dailyWage: calDailyWage(empHours),
                 toString() {
                     return `\nDay: ${this.dayNum}=> working hours: ${this.dailyHours}=> wage earned: ${this.dailyWage}`
-                }
+                },
             });
     }
     console.log(`Showing daily hours worked and wage earned: ${empDailyHoursAndWageArray}`);
+
+    // prints total wage and hours
+    let totalWage = empDailyHoursAndWageArray
+        .filter(dailyHoursAndWage => dailyHoursAndWage.dailyWage > 0)
+        .reduce((wageTotal, dailyHoursAndWage) => wageTotal + dailyHoursAndWage.dailyWage, 0);
+
+    let totalHours = empDailyHoursAndWageArray
+        .filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours > 0)
+        .reduce((hoursTotal, dailyHoursAndWage) => hoursTotal + dailyHoursAndWage.dailyHours, 0);
+
+    console.log(`Total hours: ${totalHours},  Total wage: ${totalWage}`);
+
+    // prints full-time,part-time and non working days
+    let fullWorkingArray = empDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 8);
+    console.log(`Full-Working days: ${fullWorkingArray}`);
+    let partWorkingArray = empDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 4);
+    console.log(`Part-Working days: ${partWorkingArray}`);
+    let nonWorkingArray = empDailyHoursAndWageArray.filter(dailyHoursAndWage => dailyHoursAndWage.dailyHours == 0);
+    console.log(`Non-Working days: ${nonWorkingArray}`);
 }
