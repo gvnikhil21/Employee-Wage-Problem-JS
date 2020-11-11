@@ -1,3 +1,5 @@
+let regexName = RegExp('^[A-Z][a-z]{3,}$');
+let regexGender = RegExp('[M,F]');
 class EmployeePayRollData {
     // properties
     id;
@@ -6,36 +8,33 @@ class EmployeePayRollData {
     startDate;
 
     // constructor
-    constructor(id, name, salary, gender, startDate) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
-        this.gender = gender;
-        this.startDate = startDate;
+    constructor(...params) {
+        if (!(params[0] > 0)) throw `Id is Invalid!`
+        {
+            this.id = params[0];
+        }
+        this.name = params[1];
+        if (!(params[2] > 0)) throw `Salary is Invalid!`
+        {
+            this.salary = params[2];
+        }
+        if (!(regexGender.test(params[3]))) throw `Gender is Invalid!`
+        {
+            this.gender = params[3];
+        }
+        if (params[4] > new Date()) throw `StartDate is Invalid!`
+        {
+            this.startDate = params[4];
+        }
     }
-
-    // getter and setter
-    get id() { return this.id; }
-    set id(id) { this.id = id; }
 
     get name() { return this._name; }
     set name(name) {
-        let regexName = RegExp('^[A-Z][a-z]{3,}$');
         if (regexName.test(name))
             this._name = name;
         else
-            throw `Name ${name} is Invalid!`;
+            throw 'Name is Invalid!'
     }
-
-    get salary() { return this.salary; }
-    set salary(salary) { this.salary = salary; }
-
-    get gender() { return this.gender; }
-    set gender(gender) { this.gender = gender; }
-
-    get startDate() { return this.startDate; }
-    set startDate(startDate) { this.startDate = startDate; }
-
     //methods
     toString() {
         const options = {
@@ -45,14 +44,60 @@ class EmployeePayRollData {
         return "id = " + this.id + ", name = " + this.name + ", salary = " + this.salary + ", gender = " + this.gender + ", start-date = " + empDate;
     }
 }
-
-let employeePayRollData = new EmployeePayRollData(1, "Mark", 30000, 'M', new Date());
-console.log(employeePayRollData.toString());
+// incorrect name
 try {
+   let employeePayRollData = new EmployeePayRollData(1, "Mark", 30000, 'M', new Date());
+    console.log(employeePayRollData.toString());
     employeePayRollData.name = "john";
     console.log(employeePayRollData.toString());
 } catch (e) {
     console.error(e);
 }
-employeePayRollData = new EmployeePayRollData(2, "Terissa", 30000, "F", new Date());
-console.log(employeePayRollData.toString());
+
+// correct name
+try {
+    employeePayRollData = new EmployeePayRollData(2, "Terissa", 30000, "F", new Date());
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// invalid id
+try {
+    employeePayRollData = new EmployeePayRollData(-5, "Terissa", 30000, "F", new Date());
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// invalid salary
+try {
+    employeePayRollData = new EmployeePayRollData(2, "Terissa", -30000, "F", new Date());
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// invalid gender
+try {
+    employeePayRollData = new EmployeePayRollData(2, "Terissa", 30000, "K", new Date());
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// date is invalid
+try {
+    employeePayRollData = new EmployeePayRollData(2, "Terissa", 30000, "F", new Date('2022-02-20'));
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+
+// all valid entries
+try {
+    employeePayRollData = new EmployeePayRollData(3, "Yagami", 300000, "M", new Date());
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
