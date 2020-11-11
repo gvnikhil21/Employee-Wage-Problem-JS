@@ -1,7 +1,6 @@
 class EmployeePayRollData {
     // properties
     id;
-    name;
     salary;
     gender;
     startDate;
@@ -19,8 +18,14 @@ class EmployeePayRollData {
     get id() { return this.id; }
     set id(id) { this.id = id; }
 
-    get name() { return this.name; }
-    set name(name) { this.name = name; }
+    get name() { return this._name; }
+    set name(name) {
+        let regexName = RegExp('^[A-Z][a-z]{3,}$');
+        if (regexName.test(name))
+            this._name = name;
+        else
+            throw `Name ${name} is Invalid!`;
+    }
 
     get salary() { return this.salary; }
     set salary(salary) { this.salary = salary; }
@@ -43,5 +48,11 @@ class EmployeePayRollData {
 
 let employeePayRollData = new EmployeePayRollData(1, "Mark", 30000, 'M', new Date());
 console.log(employeePayRollData.toString());
-employeePayRollData.name = "John";
+try {
+    employeePayRollData.name = "john";
+    console.log(employeePayRollData.toString());
+} catch (e) {
+    console.error(e);
+}
+employeePayRollData = new EmployeePayRollData(2, "Terissa", 30000, "F", new Date());
 console.log(employeePayRollData.toString());
